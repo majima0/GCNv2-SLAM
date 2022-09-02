@@ -96,7 +96,7 @@ protected:
     std::vector<float> mvLevelSigma2;
     std::vector<float> mvInvLevelSigma2;
 
-    std::shared_ptr<torch::jit::script::Module> module;
+    torch::jit::Module module;
 };
 
 } //namespace ORB_SLAM

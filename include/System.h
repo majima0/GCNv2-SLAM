@@ -22,7 +22,6 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include<unistd.h>
 #include<string>
 #include<thread>
 #include<opencv2/core/core.hpp>
@@ -36,6 +35,8 @@
 #include "KeyFrameDatabase.h"
 #include "ORBVocabulary.h"
 #include "Viewer.h"
+
+void usleep(__int64 usec);
 
 namespace ORB_SLAM2
 {

@@ -213,10 +213,9 @@ GCNextractor::GCNextractor(int _nfeatures, float _scaleFactor, int _nlevels,
         ++v0;
     }
 
-    const char *net_fn = getenv("GCN_PATH");
-    net_fn = (net_fn == nullptr) ? "gcn2.pt" : net_fn;
+    //const char *net_fn = getenv("GCN_PATH");
+    const char* net_fn = "C:\\Users\\share\\GCNv2_SLAM-master\\GCN2\\gcn-update\\gcn2_320x240.pt";
     module = torch::jit::load(net_fn);
-
 }
 
 void GCNextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPoint>& _keypoints, OutputArray _descriptors)
@@ -267,7 +266,7 @@ void GCNextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPo
 
     std::vector<torch::jit::IValue> inputs;
     inputs.push_back(img_var);
-    auto output = module->forward(inputs).toTuple();
+    auto output = module.forward(inputs).toTuple();
 
     auto pts  = output->elements()[0].toTensor().to(torch::kCPU).squeeze();
     auto desc = output->elements()[1].toTensor().to(torch::kCPU).squeeze();
