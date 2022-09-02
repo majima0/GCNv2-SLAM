@@ -2,22 +2,22 @@
 ## original GCNv2 SLAM
 https://github.com/jiexiong2016/GCNv2_SLAM
 ### Dependencies
-C++11 or C++0x Compiler
-Pytorch
-Pangolin
-OpenCV
-Eigen3
-DBoW2
-g2o
+C++11 or C++0x Compiler  
+Pytorch  
+Pangolin  
+OpenCV  
+Eigen3  
+DBoW2  
+g2o  
 ### ビルドの方法
 #### 環境
-自分の環境です。ここでは主にWindowsでのビルド方法を説明します。
-Windows10
-Visual Studio 2019
-CMake 3.23.1
-cuda toolkit 10.1
-cudnn 7.6.5
-libtorch1.7.0+cu101
+自分の環境です。ここでは主にWindowsでのビルド方法を説明します。  
+Windows10  
+Visual Studio 2019  
+CMake 3.23.1  
+cuda toolkit 10.1  
+cudnn 7.6.5  
+libtorch1.7.0+cu101  
 ##### libtorch
 libtorchはpipでダウンロードしたものを使用する。私はcudaの都合上1.7.0を使用している。
 ```
@@ -48,7 +48,7 @@ model = torch.jit.load('C:\\Program Files (x86)\\Microsoft Visual Studio\\MyProj
 ```
 gcn2_320x240.ptのパスは適宜変更してください。実行するとエラーが出るので、gcn2_320x240.ptをWinRAR（https://www.winrarjapan.com/download）をダウンロードして変更する。基本的には、```_32 = torch.squeeze(torch.grid_sampler(input, grid, 0, 0))```の部分を```_32 = torch.squeeze(torch.grid_sampler(input, grid, 0, 0, True))```に変更することで、エラーが出なくなります。
 ##### プロジェクトファイルの変更
-GCNextractor.ccとGCNextractor.hを変更します。
+GCNextractor.ccとGCNextractor.hを変更します。  
 変更前GCNextractor.h
 ```
 std::shared_ptr<torch::jit::script::Module> module;
@@ -65,4 +65,5 @@ auto output = module->forward(inputs).toTuple();
 ```
 auto output = module.forward(inputs).toTuple();
 ```
-また、```const char *net_fn = "D:\\gcn2_320x240.pt";```ではgcn2_320x240.ptのパスを適宜変更してください。
+また、```const char *net_fn = "D:\\gcn2_320x240.pt";```ではgcn2_320x240.ptのパスを適宜変更してください。  
+そのほかにも、WindowsではLinuxの標準ライブラリを使うことができないため、少し変更を加えています。
